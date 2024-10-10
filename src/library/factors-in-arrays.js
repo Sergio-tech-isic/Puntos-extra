@@ -52,19 +52,19 @@ Por lo tanto, el resultado es 4
 export default function factorsInArrays(a,b) {
     console.log("Arreglo: "+b)
     let factores  = generarFactores(Math.min(...b));
-    let FactoresComunesConArreglo = [];
-    let FactoresAprobados = [];
+    let factoresComunesConArreglo = [];
+    let factoresAprobados = [];
     
     factores.forEach((factor)=>{
-        if(esFactorComunDe(factor,b))FactoresComunesConArreglo.push(factor);
+        if(esFactorComunDe(factor,b))factoresComunesConArreglo.push(factor);
     });
-    console.log("Factores Comunes Con Arreglo "+FactoresComunesConArreglo);
+    console.log("Factores Comunes Con Arreglo "+factoresComunesConArreglo);
     
-    FactoresComunesConArreglo.forEach((numero)=>esAprobado(numero));
+    factoresComunesConArreglo.forEach((numero)=>esAprobado(numero));
     
-    console.log(FactoresAprobados);
+    console.log(factoresAprobados);
 
-    return FactoresAprobados.length;
+    return factoresAprobados.length;
     
     function generarFactores(minValue) {
         let comun=[];
@@ -98,10 +98,8 @@ export default function factorsInArrays(a,b) {
     function esAprobado(valor){
         let problem = false;
         a.forEach((factor)=>{
-            if(!(valor%factor==0)){
-                problem=true; 
-            }   
+            if(!(valor%factor==0))problem=true;    
         });
-        if(!problem) FactoresAprobados.push(valor);
+        if(!problem) factoresAprobados.push(valor);
     }
 }
