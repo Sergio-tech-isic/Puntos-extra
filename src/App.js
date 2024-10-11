@@ -1,9 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import spirals from './library/spirals';
 
 function App() {
-  spirals(2,2);
+  spirals(2,3);
   return ("hola");
 }
 
