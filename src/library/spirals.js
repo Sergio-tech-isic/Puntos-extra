@@ -18,6 +18,41 @@
     En una matriz de 3x3, hay 19 espirales posibles.
     
 */
+var matriz=[];
+
+export default function spirals(n,m) {
+    matriz=[];
+    crearMatriz(n,m);
+    return(matriz[n-1][m-1]);
+}
+
+function crearMatriz(filas, columnas) {
+    // Crear una matriz de n filas
+    for (let i = 0; i < filas; i++) {
+        let fila = [];
+        for (let e = 0; e < columnas; e++) {
+            if(i===0){
+                fila.push(Number(e+1));
+            }
+            
+            else if(e===0){
+                fila.push(Number(i+1));
+            }
+            
+            else {
+                let superior = (matriz[i-1][e]);
+                let lateral = (fila[e-1]);
+                let valor = (superior+lateral+1)
+                fila.push(valor);
+            }
+        }
+        // Añadir la fila a la matriz
+        matriz.push(fila);
+    }
+}
+
+
+/*
 let matriz = [];
 let matrizTerminada=[];
 let ubicacion = [0,0];
@@ -26,8 +61,8 @@ let tamañoFila = 0;
 let tamañoColumna = 0;
 let decidido = [false,false,false,false];
 
-export default function spirals(n,m) {
-    
+
+function filtro(n,m){
     if((n*m)===1){
         espiralesCreadas = 1;
     }
@@ -37,19 +72,17 @@ export default function spirals(n,m) {
     else{
         main(n,m);
     }
-    return espiralesCreadas;   
+    return espiralesCreadas;  
 }
 
 function main(filas,columnas){
-    /*matriz = [];
+    matriz = [];
     matrizTerminada=[];
     ubicacion = [0,0];
     espiralesCreadas=1;
     tamañoFila = 0;
     tamañoColumna = 0;
     decidido = [false,false,false,false];
-
-    */
 
     crearMatriz(filas, columnas);
     tamañoColumna = filas;
@@ -59,8 +92,9 @@ function main(filas,columnas){
 
     //Defino hasta donde se debe mover para iniciar a hacer espirales
     let puntoInicio = 2*(filas-1);
-    if ((columnas!==filas)) puntoInicio++;
+    //if ((columnas!==filas)) puntoInicio++;
     go();
+    console.log(puntoInicio);
 
     
 
@@ -73,30 +107,38 @@ function main(filas,columnas){
         }
         else  irAbajo();
     }
-    espiralesCreadas=0;
+    espiralesCreadas=espiralesCreadas-puntoInicio;
 
     
-
-
-    while(matriz != matrizTerminada){
+    let contar=0;
+    while(matriz !== matrizTerminada){
+        contar++;
         let centinela = false;
-        console.log("Entro en el bucle")
         decision();
-        console.log(decidido);
 
         if(decidido[0]===true){//puede abajo ir abajo
             if(decidido[1]===true){//puede abajo y derecha breakpoint e ir abajo
                 //breakpoint
-                irAbajo();            }
+                irAbajo();            
+            }
             else irAbajo();
         } 
 
         else if(decidido[1]===true){//derecha derecha ir derecha
-            irDerecha();
+            if(decidido[2]===true){//puede derecha y arriba breakpoint e ir derecha
+                //breakpoint;
+                irDerecha();
+            }
+            else irDerecha();
+            
         }
 
         else if(decidido[2]===true){//puede arriba ir arriba
-            irArriba();
+            if(decidido[3]===true){//puede arriba y izquierda breakpoint e ir arriba
+                //breakpoint;
+                irArriba();
+            }
+            else irArriba();
         }
 
         else if(decidido[3]===true){//puede izquierda ir izquierda
@@ -104,24 +146,8 @@ function main(filas,columnas){
         } 
         
         else centinela = true;
-        
-            case 'true,true,false,false':
-                //breakpoint
-                irAbajo();
-                break;    
 
-            case 'false,true,true,false'://puede derecha y arriba breakpoint e ir derecha
-                //breakpoint
-                irDerecha();
-                break;
-
-            case 'false,false,true,true'://puede arriba y izquierda breakpoint e ir arriba
-                //breakpoint
-                irArriba();
-                break;
-
-
-        if (centinela)break;
+        if(centinela) break;
     }
 
     
@@ -256,3 +282,5 @@ function puedeIzquierda(){
     else return false;
 
 } 
+
+*/

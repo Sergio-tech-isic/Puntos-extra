@@ -49,52 +49,24 @@ Por lo tanto, el resultado es 4
 
 
 */
+var factoresAprobados = [];
 export default function factorsInArrays(a,b) {
-    console.log("Arreglo: "+b)
-    let factores  = generarFactores(Math.min(...b));
-    let factoresComunesConArreglo = [];
-    let factoresAprobados = [];
+    //console.log("Arreglo: "+b)
+    var factores  = generarFactores(Math.min(...b));
+    var factoresComunesConArreglo = [];
+    factoresAprobados = []
     
     factores.forEach((factor)=>{
         if(esFactorComunDe(factor,b))factoresComunesConArreglo.push(factor);
     });
-    console.log("Factores Comunes Con Arreglo "+factoresComunesConArreglo);
+    //console.log("Factores Comunes Con Arreglo "+factoresComunesConArreglo);
     
     factoresComunesConArreglo.forEach((numero)=>esAprobado(numero));
     
-    console.log(factoresAprobados);
+    //console.log(factoresAprobados);
 
     return factoresAprobados.length;
-    
-    function generarFactores(minValue) {
-        let comun=[];
-        let i =0;
-        
-        //Saca los numeros comunes del numero mas pequeño
-        while(true){//Saca los numeros comunes 
-            i++;
-            if(i>minValue) break;
-            if((minValue%i)==0)comun.push(i);
-        }
-        if(comun.length>2&&comun[0]==1)comun.splice(0,1);
-        console.log("Comunes del mas pequeño "+comun);
-        return comun;
-    }
-    
-    function esFactorComunDe(valor,arreglo){
-        arreglo.forEach((numeroDelArreglo)=>{
-            
-            if(!numeroDelArreglo%valor==0)return false;
-        });
-        return true;
-        
-        for(let i =0;i<arreglo.length;i++){
-            if(!arreglo[i]%valor==0)return false;
-        }
-        return true;
-        
-    }
-    
+
     function esAprobado(valor){
         let problem = false;
         a.forEach((factor)=>{
@@ -102,4 +74,36 @@ export default function factorsInArrays(a,b) {
         });
         if(!problem) factoresAprobados.push(valor);
     }
+}    
+
+export function generarFactores(minValue) {
+    let comun=[];
+    let i =0;
+    
+    //Saca los numeros comunes del numero mas pequeño
+    while(true){//Saca los numeros comunes 
+        i++;
+        if(i>minValue) break;
+        if((minValue%i)==0)comun.push(i);
+    }
+    if(comun.length>2&&comun[0]==1)comun.splice(0,1);
+    //console.log("Comunes del mas pequeño "+comun);
+    return comun;
 }
+
+export function esFactorComunDe(valor,arreglo){
+    arreglo.forEach((numeroDelArreglo)=>{
+        
+        if(!numeroDelArreglo%valor==0)return false;
+    });
+    return true;
+    
+    
+}
+
+export function valoresAprobados(a,b){
+    factorsInArrays(a,b);
+    return(factoresAprobados);
+}
+
+
